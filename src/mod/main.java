@@ -42,7 +42,7 @@ public class main extends JavaPlugin implements Listener {
 
 			// if(player.hasPermission("mod.main.default")){
 			
-			if (requester.contains(null)){
+			if (!(requester.contains(player.getName()))){
 
 			sender.sendMessage(ChatColor.DARK_BLUE + "You have requested assistance from mod");
 			
