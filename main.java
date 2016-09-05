@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +31,7 @@ public class main extends JavaPlugin implements Listener {
 	ArrayList<String> requested = new ArrayList<String>();
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		final Player player = (Player) sender;
+		 Player player = (Player) sender;
 		if (command.getName().equalsIgnoreCase("mod")) {
 			
 
@@ -42,9 +42,9 @@ public class main extends JavaPlugin implements Listener {
 
 			// if(player.hasPermission("mod.main.default")){
 			
-			if (requester.contains(null)){
+			if (!(requester.contains(player.getName()))){
 
-			player.sendMessage(ChatColor.DARK_BLUE + "You have requested assistance from mod");
+			sender.sendMessage(ChatColor.DARK_BLUE + "You have requested assistance from mod");
 			
 			}
 			if (requester.contains(player.getName())){
@@ -52,14 +52,22 @@ public class main extends JavaPlugin implements Listener {
 				return false;
 				
 			}
+			if (player.hasPermission("mod.main.mod")) {
+				
+				if (requested.contains(player.getName())){
+				Bukkit.broadcast(ChatColor.DARK_BLUE + ((CommandSender) requester).getName() + "Has requested your assistance", "mod.main.mod");
+				
+				}
 			
 			requester.add(player.getName());
+			requested.add(player.getName());
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
 				public void run() {
 				
 
 					requester.remove(player.getName());
+					((LivingEntity) requested).setRemoveWhenFarAway(requester.contains(player.getName()));
 
 				}
 
@@ -67,15 +75,25 @@ public class main extends JavaPlugin implements Listener {
 			// }
 			return true;
 		}
-
+	
 		
-		for (Player player1 : Bukkit.getOnlinePlayers()) {
-			if (player1.hasPermission("mod.main.mod")) {
-				player.sendMessage(ChatColor.DARK_RED + player.getName() + "Has requested your assistance");
-			}
 		}
+				
+				
+				//if (((ArrayList<String>) requested).contains(player.getName())){
+					
+				//	command.equals("done");
+				
+				
+				
+				
+	
+		//}
 
 		return true;
 
 	}
-}
+
+	
+	}
+
