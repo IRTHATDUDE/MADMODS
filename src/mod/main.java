@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -70,7 +71,7 @@ public class main extends JavaPlugin implements Listener {
 
 	//if (command.getName().equalsIgnoreCase("done")) {
 		
-			for (Player requested : Bukkit.getOnlinePlayers()) {
+			
 		
 		
 				if (player.hasPermission("mod.main.mod")) {
@@ -91,13 +92,13 @@ public class main extends JavaPlugin implements Listener {
 					public void run() {
 					
 
-						requested.setRemoveWhenFarAway(requester.contains(player.getName()));
+						((LivingEntity) requested).setRemoveWhenFarAway(requester.contains(player.getName()));
 
 					}
 
 				}, (Long) null);
 		}
-			}
+			
 		//}
 
 		return true;
