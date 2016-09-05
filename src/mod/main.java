@@ -77,7 +77,7 @@ public class main extends JavaPlugin implements Listener {
 				if (player.hasPermission("mod.main.mod")) {
 				
 				if (!(((ArrayList<String>) requested).contains(player.getName()))){
-				player.sendMessage(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance");
+				sender.sendMessage(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance");
 				
 				}
 				
