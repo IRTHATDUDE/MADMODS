@@ -27,14 +27,13 @@ public class main extends JavaPlugin implements Listener {
 
 	}
 
-	ArrayList<Player> requester = new ArrayList<Player>();
-	ArrayList<Player> requested = new ArrayList<Player>();
+	ArrayList<String> requester = new ArrayList<String>();
+	ArrayList<String> requested = new ArrayList<String>();
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		Player player = (Player) sender;
+		final Player player = (Player) sender;
 		if (command.getName().equalsIgnoreCase("mod")) {
-			if (requester.contains(player))
-				;
+			
 
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(ChatColor.RED + "You cannot execute command in console dummy!");
@@ -42,14 +41,25 @@ public class main extends JavaPlugin implements Listener {
 			}
 
 			// if(player.hasPermission("mod.main.default")){
+			
+			
 
 			player.sendMessage(ChatColor.DARK_BLUE + "You have requested assistance from mod");
-			requester.add(player);
+			
+			
+			if (requester.contains(player.getName())){
+				sender.sendMessage(ChatColor.RED + "You have already requested a Mod");
+				return false;
+				
+			}
+			
+			requester.add(player.getName());
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
 				public void run() {
+				
 
-					requester.remove(player);
+					requester.remove(player.getName());
 
 				}
 
@@ -58,10 +68,10 @@ public class main extends JavaPlugin implements Listener {
 			return true;
 		}
 
-		String send = Bukkit.getName();
+		
 		for (Player player1 : Bukkit.getOnlinePlayers()) {
 			if (player1.hasPermission("mod.main.mod")) {
-				player.sendMessage(ChatColor.DARK_RED + Bukkit.getName() + "Has requested your assistance");
+				player.sendMessage(ChatColor.DARK_RED + player.getName() + "Has requested your assistance");
 			}
 		}
 
