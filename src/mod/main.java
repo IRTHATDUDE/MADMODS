@@ -1,11 +1,9 @@
 package mod;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
@@ -33,7 +31,7 @@ public class main extends JavaPlugin implements Listener {
 	ArrayList<String> requested = new ArrayList<String>();
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		final Player player = (Player) sender;
+		 Player player = (Player) sender;
 		if (command.getName().equalsIgnoreCase("mod")) {
 			
 
@@ -54,14 +52,22 @@ public class main extends JavaPlugin implements Listener {
 				return false;
 				
 			}
+			if (player.hasPermission("mod.main.mod")) {
+				
+				if (!(requested.contains(player.getName()))){
+				Bukkit.broadcast(ChatColor.DARK_BLUE + ((CommandSender) requester).getName() + "Has requested your assistance", "mod.main.mod");
+				
+				}
 			
 			requester.add(player.getName());
+			requested.add(player.getName());
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
 				public void run() {
 				
 
 					requester.remove(player.getName());
+					((LivingEntity) requested).setRemoveWhenFarAway(requester.contains(player.getName()));
 
 				}
 
@@ -69,45 +75,25 @@ public class main extends JavaPlugin implements Listener {
 			// }
 			return true;
 		}
-
-	//if (command.getName().equalsIgnoreCase("done")) {
+	
 		
-			
-		
-		Player p = p ((ArrayList<String>)requested);
-				if (player.hasPermission("mod.main.mod")) {
+		}
 				
-				if (!(((ArrayList<String>) p).contains(player.getName()))){
-				Bukkit.broadcast(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance", "mod.main.mod");
-				
-				}
 				
 				//if (((ArrayList<String>) requested).contains(player.getName())){
 					
 				//	command.equals("done");
 				
-				//}
-				((ArrayList<String>) p).add(player.getName());
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-
-					public void run() {
-					
-
-						p.setRemoveWhenFarAway(requester.contains(player.getName()));
-
-					}
-
-				}, (Long) null);
-		}
-			
+				
+				
+				
+	
 		//}
 
 		return true;
 
 	}
 
-	private Player p(ArrayList<String> requested2) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
-}
+
