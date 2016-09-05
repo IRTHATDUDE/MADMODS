@@ -1,5 +1,6 @@
 package mod;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
@@ -73,11 +74,11 @@ public class main extends JavaPlugin implements Listener {
 		
 			
 		
-		
+		Player p = p ((ArrayList<String>)requested);
 				if (player.hasPermission("mod.main.mod")) {
 				
-				if (!(((ArrayList<String>) requested).contains(player.getName()))){
-				((CommandSender) requested).sendMessage(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance");
+				if (!(((ArrayList<String>) p).contains(player.getName()))){
+				Bukkit.broadcast(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance", "mod.main.mod");
 				
 				}
 				
@@ -86,13 +87,13 @@ public class main extends JavaPlugin implements Listener {
 				//	command.equals("done");
 				
 				//}
-				((ArrayList<String>) requested).add(player.getName());
+				((ArrayList<String>) p).add(player.getName());
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
 					public void run() {
 					
 
-						((LivingEntity) requested).setRemoveWhenFarAway(requester.contains(player.getName()));
+						p.setRemoveWhenFarAway(requester.contains(player.getName()));
 
 					}
 
@@ -103,5 +104,10 @@ public class main extends JavaPlugin implements Listener {
 
 		return true;
 
+	}
+
+	private Player p(ArrayList<String> requested2) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
