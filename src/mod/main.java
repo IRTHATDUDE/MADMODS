@@ -68,12 +68,37 @@ public class main extends JavaPlugin implements Listener {
 			return true;
 		}
 
+	//if (command.getName().equalsIgnoreCase("done")) {
 		
-		for (Player player1 : Bukkit.getOnlinePlayers()) {
-			if (player1.hasPermission("mod.main.mod")) {
-				player.sendMessage(ChatColor.DARK_RED + player.getName() + "Has requested your assistance");
-			}
+			for (Player requested : Bukkit.getOnlinePlayers()) {
+		
+		
+				if (player.hasPermission("mod.main.mod")) {
+				
+				if (!(((ArrayList<String>) requested).contains(player.getName()))){
+				requested.sendMessage(ChatColor.DARK_RED + ((CommandSender) requester).getName() + "Has requested your assistance");
+				
+				}
+				
+				if (((ArrayList<String>) requested).contains(player.getName())){
+					
+					command.equals("done");
+				
+				}
+				((ArrayList<String>) requested).add(player.getName());
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+
+					public void run() {
+					
+
+						requested.setRemoveWhenFarAway(requester.contains(player.getName()));
+
+					}
+
+				}, (Long) null);
 		}
+			}
+		//}
 
 		return true;
 
