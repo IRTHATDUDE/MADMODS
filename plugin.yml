@@ -1,0 +1,7 @@
+main: mod.main
+name: modrequest
+version: .5
+
+commands:
+  mod:
+    description: get mod attention
