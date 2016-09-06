@@ -52,6 +52,27 @@ public class main extends JavaPlugin implements Listener{
 				return false;
 
 			}
+			for (Player player1 : Bukkit.getOnlinePlayers()) {
+			if (player1.hasPermission("mod.main.mod")) {
+				if (player1.hasPermission("mod.main.change")) {
+
+					if (((ArrayList<String>) active).contains(player1.getName())) {
+						player1.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
+								+ "Has requested your assistance");
+						return true;
+
+					} 
+					if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
+							|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change")) {
+
+						requested.add(player1.getName());
+						requested.remove(player1.getName());
+					
+					}
+				}
+
+			}
+		}
 
 			requester.add(player.getName());
 			active.add(player.getName());
@@ -68,27 +89,7 @@ public class main extends JavaPlugin implements Listener{
 			// }
 			return true;
 		}
-		for (Player player1 : Bukkit.getOnlinePlayers()) {
-			if (player1.hasPermission("mod.main.mod")) {
-				if (player1.hasPermission("mod.main.change")) {
-
-					if (!(requested.contains(player1.getName()))) {
-						player.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
-								+ "Has requested your assistance");
-						return true;
-
-					} 
-					if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
-							|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change")) {
-
-						requested.add(player1.getName());
-						requested.remove(player1.getName());
-					
-					}
-				}
-
-			}
-		}
+		
 
 		return true;
 
