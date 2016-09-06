@@ -70,7 +70,7 @@ public class main extends JavaPlugin implements Listener{
 		}
 		for (Player player1 : Bukkit.getOnlinePlayers()) {
 			if (player1.hasPermission("mod.main.mod")) {
-				if (player1.hasPermission("mod.change")) {
+				if (player1.hasPermission("mod.main.change")) {
 
 					if (!(requested.contains(player1.getName()))) {
 						player.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
