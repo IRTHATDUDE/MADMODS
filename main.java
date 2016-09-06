@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class main extends JavaPlugin implements Listener, CommandExecutor {
+public class main extends JavaPlugin implements Listener{
 
 	@Override
 	public void onEnable() {
@@ -24,9 +23,9 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 		getLogger().info("IT WORRKS!");
 	}
 
-	public void chatAI() {
+	
 
-	}
+	
 
 	ArrayList<String> requester = new ArrayList<String>();
 	ArrayList<String> requested = new ArrayList<String>();
@@ -68,27 +67,27 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 			}, 3600);
 			// }
 			return true;
-		} 
-		for(Player player1 : Bukkit.getOnlinePlayers()) {
-		if (player1.hasPermission("mod.main.mod")) {
-			if (player1.hasPermission("mod.change")){
-				
-			if (!(requested.contains(player1.getName()))) {
-				player.sendMessage(
-						ChatColor.DARK_BLUE + ((CommandSender) requester).getName() + "Has requested your assistance");
+		}
+		for (Player player1 : Bukkit.getOnlinePlayers()) {
+			if (player1.hasPermission("mod.main.mod")) {
+				if (player1.hasPermission("mod.change")) {
+
+					if (!(requested.contains(player1.getName()))) {
+						player.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
+								+ "Has requested your assistance");
+
+					} 
+					if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
+							|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change")) {
+
+						requested.add(player1.getName());
+						requested.remove(player1.getName());
+					
+					}
+				}
 
 			}
-			if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
-					|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change"))
-				;
-
-			requested.add(player1.getName());
-			requested.remove(player1.getName());
-
 		}
-
-		}}
-
 
 		return true;
 
