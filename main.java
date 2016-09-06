@@ -10,15 +10,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-public class main extends JavaPlugin implements Listener, CommandExecutor{
+import mod.addrequsted;
+public class main extends JavaPlugin implements Listener, CommandExecutor {
 
 	@Override
 	public void onEnable() {
-		getLogger().info("IT WORRKS!"); 
-		
-		getCommand("add").setExecutor(this);
-		getCommand("remove").setExecutor(this);
+		getLogger().info("IT WORRKS!");
+
+		getCommand("add").setExecutor(new addrequsted());
+		getCommand("remove").setExecutor(new addrequsted());
 		getCommand("mod").setExecutor(this);
 
 	}
@@ -28,18 +28,12 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		getLogger().info("IT WORRKS!");
 	}
 
-	
-
-	
-
 	ArrayList<String> requester = new ArrayList<String>();
-	ArrayList<String> requested = new ArrayList<String>();
-	ArrayList<String> active = new ArrayList<String>();
+	// ArrayList<String> requested = new ArrayList<String>();
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Player player = (Player) sender;
-		if (command.getName().equalsIgnoreCase("mod")  || (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
-				|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change"))) {
+		if (command.getName().equalsIgnoreCase("mod")) {
 
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(ChatColor.RED + "You cannot execute command in console dummy!");
@@ -52,47 +46,29 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 
 				sender.sendMessage(ChatColor.DARK_BLUE + "You have requested assistance from mod");
 
+				return true;
 			}
 			if (requester.contains(player.getName())) {
 				sender.sendMessage(ChatColor.RED + "You have already requested a Mod");
 				return false;
 
 			}
-			for (Player player1 : Bukkit.getOnlinePlayers()) {
-			if (player1.hasPermission("mod.main.mod")) {
-				if (player1.hasPermission("mod.main.change")) {
 
-					if (((ArrayList<String>) active).contains(player1.getName())) {
-						player1.sendMessage(ChatColor.DARK_BLUE +  ((CommandSender) requester).getName()
-								+ "Has requested your assistance");
-						return true;
-
-					} 
-					
-
-						requested.add(player1.getName());
-						requested.remove(player1.getName());
-					
-					}
-				}
-
-			}
 		}
 
-			requester.add(player.getName());
-			active.add(player.getName());
+		requester.add(player.getName());
 
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
-				public void run() {
+			public void run() {
 
-					requester.remove(player.getName());
+				requester.remove(player.getName());
 
-				}
+			}
 
-			}, 3600);
-			// }
-			return true;
+		}, 3600);
+		// }
+		return true;
 
 	}
 
