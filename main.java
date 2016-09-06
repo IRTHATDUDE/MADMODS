@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class main extends JavaPlugin implements Listener{
+public class main extends JavaPlugin implements Listener, CommandExecutor{
 
 	@Override
 	public void onEnable() {
-		getLogger().info("IT WORRKS!");
+		getLogger().info("IT WORRKS!"); 
+		
+		getCommand("add").setExecutor(this);
+		getCommand("remove").setExecutor(this);
+		getCommand("mod").setExecutor(this);
 
 	}
 
@@ -33,7 +38,8 @@ public class main extends JavaPlugin implements Listener{
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Player player = (Player) sender;
-		if (command.getName().equalsIgnoreCase("mod")) {
+		if (command.getName().equalsIgnoreCase("mod")  || (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
+				|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change"))) {
 
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(ChatColor.RED + "You cannot execute command in console dummy!");
@@ -57,13 +63,12 @@ public class main extends JavaPlugin implements Listener{
 				if (player1.hasPermission("mod.main.change")) {
 
 					if (((ArrayList<String>) active).contains(player1.getName())) {
-						player1.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
+						player1.sendMessage(ChatColor.DARK_BLUE +  ((CommandSender) requester).getName()
 								+ "Has requested your assistance");
 						return true;
 
 					} 
-					if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
-							|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change")) {
+					
 
 						requested.add(player1.getName());
 						requested.remove(player1.getName());
@@ -88,10 +93,6 @@ public class main extends JavaPlugin implements Listener{
 			}, 3600);
 			// }
 			return true;
-		}
-		
-
-		return true;
 
 	}
 
