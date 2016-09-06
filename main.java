@@ -75,6 +75,7 @@ public class main extends JavaPlugin implements Listener{
 					if (!(requested.contains(player1.getName()))) {
 						player.sendMessage(ChatColor.DARK_BLUE + ((CommandSender) requester).getName()
 								+ "Has requested your assistance");
+						return true;
 
 					} 
 					if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change")
