@@ -5,3 +5,23 @@ version: .5
 commands:
   mod:
     description: get mod attention
+  add:
+    description: perm based effects
+  remove:
+    description: perm based effects
+    
+    
+permissions:
+  mod.main.default:
+    description: calls mods attention
+    default: true
+  
+  mod.main.mod:
+    description: modrequest
+    default: op
+    
+  mod.main.change:
+    description: changes mods requested state
+    default: op
+   
+    
