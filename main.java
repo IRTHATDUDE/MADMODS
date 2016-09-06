@@ -68,9 +68,10 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 			}, 3600);
 			// }
 			return true;
-		}  for(Player player1 : Bukkit.getOnlinePlayers()) {
+		} 
+		for(Player player1 : Bukkit.getOnlinePlayers()) {
 		if (player1.hasPermission("mod.main.mod")) {
-			if (player1.hasPermission("mod.change"))
+			if (player1.hasPermission("mod.change")){
 				
 			if (!(requested.contains(player1.getName()))) {
 				player.sendMessage(
@@ -86,7 +87,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 
 		}
 
-		}
+		}}
 
 
 		return true;
