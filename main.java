@@ -55,6 +55,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 			}
 
 			requester.add(player.getName());
+			active.add(player.getName());
 
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
@@ -67,11 +68,11 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 			}, 3600);
 			// }
 			return true;
-		}
-		if (player.hasPermission("mod.main.mod")) {
-			if (player.hasPermission("mod.change"))
-				active.add(player.getName());
-			if (!(requested.contains(player.getName()))) {
+		}  for(Player player1 : Bukkit.getOnlinePlayers()) {
+		if (player1.hasPermission("mod.main.mod")) {
+			if (player1.hasPermission("mod.change"))
+				
+			if (!(requested.contains(player1.getName()))) {
 				Bukkit.broadcast(
 						ChatColor.DARK_BLUE + ((CommandSender) requester).getName() + "Has requested your assistance",
 						"mod.main.mod");
@@ -81,12 +82,12 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 					|| command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change"))
 				;
 
-			requested.add(player.getName());
-			requested.remove(player.getName());
+			requested.add(player1.getName());
+			requested.remove(player1.getName());
 
 		}
 
-
+		}
 
 
 		return true;
