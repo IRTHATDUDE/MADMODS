@@ -31,7 +31,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 	ArrayList<String> requester = new ArrayList<String>();
 	ArrayList<String> requested = new ArrayList<String>();
 	ArrayList<String> active = new ArrayList<String>();
-	HashMap<UUID,PermissionAttachment>();
+	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		 Player player = (Player) sender;
 		if (command.getName().equalsIgnoreCase("mod")) {
