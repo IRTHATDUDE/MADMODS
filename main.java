@@ -56,19 +56,20 @@ public class main extends JavaPlugin implements Listener, CommandExecutor {
 			}
 			
 			if (player.hasPermission("mod.main.mod")) {
-			if (player.hasPermission("mod.remove"))
+			if (player.hasPermission("mod.change"))
 				active.add(player.getName());
-				if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.remove"));
-				 
+				if (command.getName().equalsIgnoreCase("remove") && sender.hasPermission("mod.change") || command.getName().equalsIgnoreCase("add") && sender.hasPermission("mod.change"));
+				  
+					requested.add(player.getName());
 				     requested.remove(player.getName());
-			for (String active : active);	
-				if (requested.contains(player.getName())){
+				
+				if (active.contains(player.getName())){
 				Bukkit.broadcast(ChatColor.DARK_BLUE + ((CommandSender) requester).getName() + "Has requested your assistance", "mod.main.mod");
 				
 				}
 			
 			requester.add(player.getName());
-			requested.add(player.getName());
+			
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
 				public void run() {
